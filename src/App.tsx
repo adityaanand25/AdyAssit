@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ApiKeyInput } from './components/ApiKeyInput';
 import { ChatContainer } from './components/ChatContainer';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 import { StorageService } from './utils/storage';
 
 function App() {
@@ -25,10 +26,20 @@ function App() {
   };
 
   if (!apiKey) {
-    return <ApiKeyInput onApiKeySubmit={handleApiKeySubmit} />;
+    return (
+      <>
+        <PWAInstallPrompt />
+        <ApiKeyInput onApiKeySubmit={handleApiKeySubmit} />
+      </>
+    );
   }
 
-  return <ChatContainer apiKey={apiKey} onResetApiKey={handleResetApiKey} />;
+  return (
+    <>
+      <PWAInstallPrompt />
+      <ChatContainer apiKey={apiKey} onResetApiKey={handleResetApiKey} />
+    </>
+  );
 }
 
 export default App;
